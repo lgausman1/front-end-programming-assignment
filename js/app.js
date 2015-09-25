@@ -2,7 +2,7 @@
 
 /** @jsx React.DOM */
 
-var CommentBox = React.createClass({
+var VideoBox = React.createClass({
 
 	loadCommentsFromServer: function() {
 		$.ajax({
@@ -30,9 +30,9 @@ var CommentBox = React.createClass({
 
 	render: function() {
 		return (
-			<div className="commentBox col-md-8 col-md-offset-1">
+			<div className="videoBox">
 				<h1>Videos Table</h1>
-				<CommentList data={this.state.data} />
+				<VideoList data={this.state.data} />
 				
 			</div>
 			);
@@ -42,32 +42,32 @@ var CommentBox = React.createClass({
 var RowDiv = React.createClass({
 	render: function() {
 		return (
-			<tr className="comment">
+			<tr className="video">
 				{this.props.children}
 			</tr>
 			)
 	}
 });
 
-var CommentList = React.createClass({
+var VideoList = React.createClass({
 	render: function() {
 
-		var commentNodes = this.props.data.map(function(comment, index) {
+		var videoNodes = this.props.data.map(function(vid, index) {
 			return (
 
-				<RowDiv title={comment.title} key={index}>
-					<td><img src={comment.thumb_url_default} /></td>
-					<td>{comment.title}</td>
-					<td>{comment.views}</td>
-					<td>{comment.id}</td>
-					<td>{comment.created_on}</td>
+				<RowDiv title={vid.title} key={index}>
+					<td><img src={vid.thumb_url_default} /></td>
+					<td>{vid.title}</td>
+					<td>{vid.views}</td>
+					<td>{vid.id}</td>
+					<td>{vid.created_on}</td>
 					
 				</RowDiv>
 
 				);
 		}); // end commentNodes
 		return (
-			<table className="table">
+			<table className="table table-striped">
 				<thead>
 					<tr>
 						<th>Video Thumbnail</th>
@@ -77,8 +77,8 @@ var CommentList = React.createClass({
 						<th>Created Date</th>
 					</tr>
 				</thead>
-				<tbody className="commentList">
-					{commentNodes}
+				<tbody className="videoList">
+					{videoNodes}
 				</tbody>
 			</table>
 			);
@@ -97,6 +97,6 @@ var CommentList = React.createClass({
 
 
 React.render(
-	<CommentBox url="videos.json" pollInterval={2000} />,
+	<VideoBox url="videos.json" pollInterval={2000} />,
 	document.getElementById('app')
 	);
