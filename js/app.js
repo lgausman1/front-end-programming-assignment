@@ -1,8 +1,6 @@
-// json columns will be thumb_url_default, views, created_on, title, id
-
 /** @jsx React.DOM */
 
-var VideoBox = React.createClass({
+var VideoTable = React.createClass({
 
 	loadCommentsFromServer: function() {
 		$.ajax({
@@ -17,6 +15,7 @@ var VideoBox = React.createClass({
 				console.error(this.props.url, status, err.toString());
 			}.bind(this)
 		});
+		$('table').tablesorter({debug: true});
 	},
 
 	getInitialState: function() {
@@ -65,9 +64,10 @@ var VideoList = React.createClass({
 				</RowDiv>
 
 				);
-		}); // end commentNodes
+		}); // end videoNodes
 		return (
-			<table className="table table-striped">
+
+			<table className="table table-striped tablesorter" id="table-sort">
 				<thead>
 					<tr>
 						<th>Video Thumbnail</th>
@@ -85,18 +85,19 @@ var VideoList = React.createClass({
 	}
 });
 
-// var SearchBar = React.createClass({
-// 	render: function() {
-// 		return (
-// 			<form>
-// 				<input type="text" placeholder="Search..." />
-// 			</form>
-// 			)
-// 	}
-// });
+var SearchBar = React.createClass({
+	render: function() {
+		return (
+			<form>
+				<input type="text" placeholder="Search..." />
+			</form>
+			)
+	}
+});
 
 
 React.render(
-	<VideoBox url="videos.json" pollInterval={2000} />,
+	<VideoTable url="videos.json" pollInterval={2000} />,
 	document.getElementById('app')
+
 	);

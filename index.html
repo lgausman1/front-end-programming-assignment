@@ -9,13 +9,20 @@
 <div class="col-md-12">
   <div id="app">
   	<!-- render react component here -->
-  </div>	
+  </div>
+
 </div>
 
   <script src="js/jquery/dist/jquery.min.js"></script>
+  <script src="js/jquery.tablesorter.js"></script>
   <script src="js/react/react.js"></script>
   <script src="js/react/JSXTransformer.js"></script>
   <script src="js/main.js"></script>
   <script src="js/app.js" type="text/jsx"></script>
+  <script>
+	$(document).ready(function() {
+		$('table').tablesorter({debug: true});
+	});
+  </script>
 </body>
 </html>
